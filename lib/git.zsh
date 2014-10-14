@@ -3,7 +3,11 @@ function git_prompt_info() {
   if [[ "$(git config --get oh-my-zsh.hide-status)" != "1" ]]; then
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+		local dirty=' X'
+		if [[ "$(git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
+			dirty="$(parse_git_dirty)"
+		fi
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}${dirty}$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
