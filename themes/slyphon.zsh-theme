@@ -10,7 +10,8 @@ PROMPT="${username_bit}${at_host_bit}"                    # host info and ':'
 PROMPT+="%{$fg[yellow]%}%~%{$reset_color%}"       				# directory info
 PROMPT+="
 "                                                         # newline
-PROMPT+="%{$FG[002]%}%D{[%Y%m%d-%H:%M:%S]}"       				# date
+#PROMPT+="%{$FG[002]%}%D{[%Y%m%d-%H:%M:%S]}"       				# date
+PROMPT+="%{$FG[002]%}%D{[%H:%M:%S]}"       							  # time only
 
 root_or_user_char="%(!.#.-❯)"                             # promptchar is different if we're rootful
 
