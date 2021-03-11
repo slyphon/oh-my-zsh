@@ -1,6 +1,15 @@
+function _jds_prompt_hostname() {
+	local name
+	name="$(uname -n)"
+	case "${name}" in
+		weasel) printf "" ;;
+		*) printf "$name" ;;
+	esac
+}
+
 
 username_bit='%(!,%{$fg_bold[red]%}ROOT,%{$fg[green]%}%n)%{$reset_color%}' # show either our name or 'ROOT'
-at_host_bit='%{$fg_bold[green]%}@%m:%{$reset_color%}'                      # show host info
+at_host_bit='%{$fg_bold[green]%}@$(_jds_prompt_hostname)%m:%{$reset_color%}'                      # show host info
 
 function _jds_prompt_klist_status() {
 	klist -t &>/dev/null || echo "%{$fg[red]%}[K]%{$reset_color%}";
