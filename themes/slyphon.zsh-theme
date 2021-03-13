@@ -3,7 +3,11 @@ username_bit='%(!,%{$fg_bold[red]%}ROOT,%{$fg[green]%}%n)%{$reset_color%}' # sho
 at_host_bit='%{$fg_bold[green]%}@%m:%{$reset_color%}'                      # show host info
 
 function _jds_prompt_klist_status() {
-	klist -t &>/dev/null || echo "%{$fg[red]%}[K]%{$reset_color%}";
+	if [[ -n "${_jds_prompt_no_klist:-}" ]]; then
+		return 0
+	else
+		klist -t &>/dev/null || echo "%{$fg[red]%}[K]%{$reset_color%}";
+	fi
 }
 
 PROMPT="${username_bit}${at_host_bit}"                    # host info and ':'
